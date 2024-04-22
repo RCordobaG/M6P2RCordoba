@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">M6P2RCordoba</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="orb_id_text_placeholder">ID Placeholder</string>
+    <string name="orb_name_text_placeholder">Orb name placeholder</string>
+    <string name="orb_description_text_placeholder">Orb description text placeholder</string>
+    <string name="orb_levels_placeholder">Available spells</string>
+    <string name="orb_levels_textview_placeholder">Orb levels placeholder</string>
+    <string name="app_name_text">MateriAPI App</string>
+    <string name="materia_description_placeholder_text">Materia Description placeholder</string>
+    <string name="materia_type_header_placeholder">Materia Type Placeholder</string>
+    <string name="toast_error_message">An error occurred: %1$s</string>
+</resources>
