@@ -1,9 +1,13 @@
 package com.rcordoba.m6p2rcordoba.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.rcordoba.m6p2rcordoba.Constants
 import com.rcordoba.m6p2rcordoba.R
@@ -20,6 +24,9 @@ import retrofit2.Retrofit
 
 class MainActivity : AppCompatActivity() {
 
+    private var keepSplash = true
+    private val delay = 3600L
+
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var repository: MateriaRepository
@@ -27,6 +34,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val splashScreen = installSplashScreen()
+        //setupSplashScreen(splashScreen = splashScreen)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -62,5 +71,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    private fun setupSplashScreen(splashScreen: SplashScreen) {
+        splashScreen.setKeepOnScreenCondition{keepSplash}
+        Handler(Looper.getMainLooper()).postDelayed({
+            keepSplash = false
+        },delay)
     }
 }

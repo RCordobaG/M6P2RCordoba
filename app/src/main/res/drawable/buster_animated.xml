@@ -1,0 +1,88 @@
+<!-- Animation frames are wheel0.png through wheel5.png
+    files inside the res/drawable/ folder -->
+<animation-list android:id="@+id/selected"
+    android:oneshot="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/frame_00_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_01_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_02_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_03_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_04_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_05_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_06_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_07_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_08_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_09_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_10_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_11_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_12_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_13_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_14_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_15_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_16_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_17_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_18_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_19_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_20_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_21_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_22_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_23_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_24_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_25_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_26_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_27_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_28_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_29_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_30_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_31_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_32_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_33_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_34_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_35_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_36_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_37_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_38_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_39_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_40_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_41_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_42_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_43_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_44_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_45_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_46_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_47_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_48_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_49_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_50_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_51_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_52_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_53_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_54_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_55_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_56_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_57_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_58_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_59_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_60_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_61_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_62_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_63_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_64_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_65_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_66_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_67_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_68_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_69_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_70_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_71_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_72_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_73_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_74_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_75_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_76_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_77_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_78_delay_0_03s" android:duration="03" />
+    <item android:drawable="@drawable/frame_79_delay_0_03s" android:duration="03" />
+</animation-list>
+
+

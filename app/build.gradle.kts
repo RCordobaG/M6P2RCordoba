@@ -62,4 +62,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
     implementation(libs.roundedimageview)
+
+    implementation(libs.androidx.core.splashscreen)
 }
