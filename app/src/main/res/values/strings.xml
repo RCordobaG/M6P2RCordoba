@@ -11,4 +11,6 @@
     <string name="materia_description_placeholder_text">Materia Description placeholder</string>
     <string name="materia_type_header_placeholder">Materia Type Placeholder</string>
     <string name="toast_error_message">An error occurred: %1$s</string>
+    <string name="materia_type_placeholder">Materia Type Placeholder</string>
+    <string name="materia_description_placeholder">Materia Description Placeholder</string>
 </resources>
