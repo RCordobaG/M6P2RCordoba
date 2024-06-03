@@ -85,6 +85,7 @@ class MateriaListTypeFragment : Fragment() {
                         p0: Call<MateriaTypeDTO>,
                         response: Response<MateriaTypeDTO>
                     ) {
+                        binding.errorTextViewDetail.visibility = View.INVISIBLE
                         binding.apply {
                             materiaTypeHeader.text = response.body()?.type
                             typeDescriptionText.text = response.body()?.description
@@ -103,6 +104,7 @@ class MateriaListTypeFragment : Fragment() {
                     }
 
                     override fun onFailure(p0: Call<MateriaTypeDTO>, p1: Throwable) {
+                        binding.errorTextViewDetail.visibility = View.VISIBLE
                         Log.d(Constants.LOGTAG,"Error occurred: ${p1.message}")
                         Toast.makeText(requireContext(),
                             getString(R.string.toast_error_message, p1.message),

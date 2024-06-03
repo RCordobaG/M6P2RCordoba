@@ -8,6 +8,19 @@
     tools:context=".ui.fragments.MateriaListTypeFragment">
 
     <TextView
+        android:id="@+id/errorTextViewDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/api_error_text"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/materiaTypeHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

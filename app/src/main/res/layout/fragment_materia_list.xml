@@ -31,4 +31,17 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <TextView
+        android:id="@+id/errorTextViewMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/api_error_text"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/materiaListRecycler"
+        app:layout_constraintEnd_toEndOf="@+id/materiaListRecycler"
+        app:layout_constraintStart_toStartOf="@+id/materiaListRecycler"
+        app:layout_constraintTop_toTopOf="@+id/generalListTitle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
