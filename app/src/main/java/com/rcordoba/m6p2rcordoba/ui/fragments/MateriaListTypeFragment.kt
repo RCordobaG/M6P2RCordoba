@@ -1,11 +1,13 @@
 package com.rcordoba.m6p2rcordoba.ui.fragments
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.telecom.CallEndpoint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.MediaController
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -42,6 +44,7 @@ class MateriaListTypeFragment : Fragment() {
     private var type_id: String? = null
 
     private lateinit var repository: MateriaRepository
+    private lateinit var fragmentMediaController: MediaController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +78,8 @@ class MateriaListTypeFragment : Fragment() {
                 val call: Call<MateriaTypeDTO> = repository.getMateriaType(type)
                 var orbs: List<materiaOrbs>?
 
+                fragmentMediaController = MediaController(requireContext())
+
                 call.enqueue(object : Callback<MateriaTypeDTO>{
                     override fun onResponse(
                         p0: Call<MateriaTypeDTO>,
@@ -87,11 +92,13 @@ class MateriaListTypeFragment : Fragment() {
                             Log.d(Constants.LOGTAG,"${orbs}")
                             orbRecyclerView.apply {
                                 layoutManager = LinearLayoutManager(requireContext())
-                                adapter = OrbAdapter(orbs!!)
+                                adapter = OrbAdapter(orbs!!,requireContext())
                             }
                             Glide.with(requireActivity())
                                 .load(response.body()?.image)
                                 .into(typeImage)
+
+
                         }
                     }
 

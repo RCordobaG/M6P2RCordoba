@@ -14,4 +14,7 @@ class MateriaTypeDTO {
 
     @SerializedName("orbs")
     var orbs: List<materiaOrbs>? = null
+
+    @SerializedName("video")
+    var video: String? = null
 }

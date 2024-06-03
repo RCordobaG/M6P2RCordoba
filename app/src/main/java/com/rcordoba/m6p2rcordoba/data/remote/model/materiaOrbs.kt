@@ -4,5 +4,6 @@ data class materiaOrbs (
     var id: Int = 0,
     var name: String? = null,
     var description: String? = null,
-    var levels: List<String>
+    var levels: List<String>,
+    var video: String? = null
 )

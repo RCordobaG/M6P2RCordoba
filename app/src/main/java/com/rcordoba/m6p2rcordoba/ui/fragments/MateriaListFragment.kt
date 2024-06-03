@@ -1,5 +1,6 @@
 package com.rcordoba.m6p2rcordoba.ui.fragments
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -34,10 +35,11 @@ class MateriaListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var repository: MateriaRepository
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        mediaPlayer = MediaPlayer.create(requireContext(),R.raw.sound_effect)
     }
 
     override fun onCreateView(
@@ -76,6 +78,7 @@ class MateriaListFragment : Fragment() {
                             layoutManager = LinearLayoutManager(requireContext())
                             adapter = MateriaListAdapter(types) { type ->
                                 Log.d(Constants.LOGTAG, "Endpoint: ${type.endpoint.toString()}")
+                                mediaPlayer.start()
                                 requireActivity().supportFragmentManager.beginTransaction()
                                     .replace(
                                         R.id.fragmentContainerView,
