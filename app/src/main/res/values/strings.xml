@@ -14,4 +14,16 @@
     <string name="materia_type_placeholder">Materia Type Placeholder</string>
     <string name="materia_description_placeholder">Materia Description Placeholder</string>
     <string name="api_error_text">Unable to establish connection to API. Check you are connected to the Internet and try again.</string>
+    <string name="no_account_text">No account? Create one now</string>
+    <string name="email_text">E-mail</string>
+    <string name="password_text">Password</string>
+    <string name="email_placeholder">name@domain.com</string>
+    <string name="login_failed">Login failed</string>
+    <string name="password_can_not_empty">Password can not be empty!</string>
+    <string name="email_can_not_empty">Email can not be empty!</string>
+    <string name="log_out_button">Log Out</string>
+    <string name="log_in">Log In</string>
+    <string name="account_sign_in_text">Already have an account? Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="reset_password">Reset your Password</string>
 </resources>

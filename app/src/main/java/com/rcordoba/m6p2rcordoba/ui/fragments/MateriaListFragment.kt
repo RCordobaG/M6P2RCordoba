@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.rcordoba.m6p2rcordoba.Constants
 import com.rcordoba.m6p2rcordoba.R
 import com.rcordoba.m6p2rcordoba.application.MateriaApp
@@ -17,6 +18,7 @@ import com.rcordoba.m6p2rcordoba.data.MateriaRepository
 import com.rcordoba.m6p2rcordoba.data.remote.model.MateriaDTO
 import com.rcordoba.m6p2rcordoba.databinding.FragmentMateriaListBinding
 import com.rcordoba.m6p2rcordoba.ui.adapters.MateriaListAdapter
+import com.rcordoba.m6p2rcordoba.ui.fragments.login.FragmentLogin
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,6 +38,8 @@ class MateriaListFragment : Fragment() {
 
     private lateinit var repository: MateriaRepository
     private lateinit var mediaPlayer: MediaPlayer
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +62,13 @@ class MateriaListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
+        binding.listLogoutButton.setOnClickListener{
+            auth.signOut()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, FragmentLogin()).commit()
+        }
 
         repository = (requireActivity().application as MateriaApp).repository
 

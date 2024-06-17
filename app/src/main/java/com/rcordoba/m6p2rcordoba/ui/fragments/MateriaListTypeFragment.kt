@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.rcordoba.m6p2rcordoba.Constants
 import com.rcordoba.m6p2rcordoba.R
 import com.rcordoba.m6p2rcordoba.application.MateriaApp
@@ -23,6 +24,7 @@ import com.rcordoba.m6p2rcordoba.data.remote.model.materiaOrbs
 import com.rcordoba.m6p2rcordoba.databinding.FragmentMateriaListBinding
 import com.rcordoba.m6p2rcordoba.databinding.FragmentMateriaTypeBinding
 import com.rcordoba.m6p2rcordoba.ui.adapters.OrbAdapter
+import com.rcordoba.m6p2rcordoba.ui.fragments.login.FragmentLogin
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,6 +47,8 @@ class MateriaListTypeFragment : Fragment() {
 
     private lateinit var repository: MateriaRepository
     private lateinit var fragmentMediaController: MediaController
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +74,12 @@ class MateriaListTypeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        auth = FirebaseAuth.getInstance()
+        binding.typeLogoutButton.setOnClickListener{
+            auth.signOut()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView,FragmentLogin()).commit()
+        }
 
         repository = (requireActivity().application as MateriaApp).repository
 

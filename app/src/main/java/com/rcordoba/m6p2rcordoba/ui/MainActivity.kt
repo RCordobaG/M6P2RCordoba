@@ -16,6 +16,7 @@ import com.rcordoba.m6p2rcordoba.data.remote.RetrofitHelper
 import com.rcordoba.m6p2rcordoba.data.remote.model.MateriaDTO
 import com.rcordoba.m6p2rcordoba.databinding.ActivityMainBinding
 import com.rcordoba.m6p2rcordoba.ui.fragments.MateriaListFragment
+import com.rcordoba.m6p2rcordoba.ui.fragments.login.FragmentLogin
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         if(savedInstanceState == null){
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, MateriaListFragment())
+                .replace(R.id.fragmentContainerView, FragmentLogin())
                 .commit()
         }
 
