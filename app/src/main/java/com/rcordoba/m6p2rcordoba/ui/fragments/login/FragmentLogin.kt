@@ -1,12 +1,15 @@
 package com.rcordoba.m6p2rcordoba.ui.fragments.login
 
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -114,6 +117,47 @@ class FragmentLogin : Fragment() {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerView,FragmentSignUp())
                 .commit()
+        }
+
+        binding.resetPasswordText.setOnClickListener{
+            val resetMail = EditText(it.context)
+            resetMail.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+
+            val passwordResetDialog = AlertDialog.Builder(it.context)
+                .setTitle(getString(R.string.recoverPassStr))
+                .setMessage(getString(R.string.insertEmailRecStr))
+                .setView(resetMail)
+                .setPositiveButton(getString(R.string.sendStr)) { _, _ ->
+                    val mail = resetMail.text.toString()
+                    if (mail.isNotEmpty()) {
+                        auth.sendPasswordResetEmail(mail).addOnSuccessListener {
+                            Toast.makeText(
+                                requireContext(),
+                                getString(R.string.emailLinkStr),
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }.addOnFailureListener {
+                            Toast.makeText(
+                                requireContext(),
+                                getString(R.string.LinkEmailStrFail, it.message),
+                                Toast.LENGTH_SHORT
+                            )
+                                .show() //it tiene la excepciÃ³n
+                        }
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.InsertEmailStr),
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }.setNegativeButton(getString(R.string.cancelStr)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+                .show()
         }
     }
 

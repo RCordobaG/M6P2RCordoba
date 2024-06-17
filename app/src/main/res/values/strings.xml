@@ -26,4 +26,11 @@
     <string name="account_sign_in_text">Already have an account? Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="reset_password">Reset your Password</string>
+    <string name="recoverPassStr">Send password reset email</string>
+    <string name="insertEmailRecStr">Please input your email to send the password reset email message</string>
+    <string name="sendStr">Send</string>
+    <string name="emailLinkStr">Message sent. Check your Spam folder</string>
+    <string name="LinkEmailStrFail">Could not send the password reset email</string>
+    <string name="InsertEmailStr">Email must not be empty</string>
+    <string name="cancelStr">Cancel</string>
 </resources>
