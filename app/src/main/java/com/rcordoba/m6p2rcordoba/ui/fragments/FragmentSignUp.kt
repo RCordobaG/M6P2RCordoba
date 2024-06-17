@@ -69,7 +69,7 @@ class FragmentSignUp : Fragment() {
             var email = binding.signUpTextEmail.text.toString()
             var password = binding.signUpTextPassword.text.toString()
             if (email.isNotBlank()){
-                if(password.isNotBlank()){
+                if(password.isNotBlank() && password.length >= 6){
                     auth.createUserWithEmailAndPassword(email,password)
                         .addOnCompleteListener{ task ->
                             if(task.isSuccessful){

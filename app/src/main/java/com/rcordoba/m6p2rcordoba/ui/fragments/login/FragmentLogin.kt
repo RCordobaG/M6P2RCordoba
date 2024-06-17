@@ -80,7 +80,7 @@ class FragmentLogin : Fragment() {
             var email = binding.loginTextEmail.text.toString()
             var password = binding.loginTextPassword.text.toString()
             if (email.isNotBlank()){
-                if(password.isNotBlank() || password.length < 6){
+                if(password.isNotBlank() && password.length >= 6){
                     auth.signInWithEmailAndPassword(email,password)
                         .addOnCompleteListener{ task ->
                             if(task.isSuccessful){

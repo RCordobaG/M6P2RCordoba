@@ -15,6 +15,9 @@ class MateriaTypeDTO {
     @SerializedName("orbs")
     var orbs: List<materiaOrbs>? = null
 
-    @SerializedName("video")
-    var video: String? = null
+    @SerializedName("lat")
+    var latitude: Double? = null
+
+    @SerializedName("lon")
+    var longitude: Double? = null
 }

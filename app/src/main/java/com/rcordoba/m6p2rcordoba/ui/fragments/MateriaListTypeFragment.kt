@@ -13,6 +13,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.android.gms.maps.CameraUpdate
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.LocationSource
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.rcordoba.m6p2rcordoba.Constants
 import com.rcordoba.m6p2rcordoba.R
@@ -39,9 +48,11 @@ import retrofit2.Response
 
 private const val TYPE_ID = "endpoint"
 
-class MateriaListTypeFragment : Fragment() {
+class MateriaListTypeFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentMateriaTypeBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var map : GoogleMap
 
     private var type_id: String? = null
 
@@ -50,8 +61,11 @@ class MateriaListTypeFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
 
+    lateinit var icon:BitmapDescriptor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        icon = BitmapDescriptorFactory.fromResource(R.drawable.dog_bone)
         arguments?.let { args ->
             type_id = args.getString(TYPE_ID)
             Log.d(Constants.LOGTAG, "Received endpoint: ${type_id}")
@@ -75,6 +89,9 @@ class MateriaListTypeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
+
+        binding.mapView3.getMapAsync(this)
+
         binding.typeLogoutButton.setOnClickListener{
             auth.signOut()
             requireActivity().supportFragmentManager.beginTransaction()
@@ -99,6 +116,7 @@ class MateriaListTypeFragment : Fragment() {
                         binding.apply {
                             materiaTypeHeader.text = response.body()?.type
                             typeDescriptionText.text = response.body()?.description
+
                             orbs = response.body()?.orbs!!
                             Log.d(Constants.LOGTAG,"${orbs}")
                             orbRecyclerView.apply {
@@ -109,7 +127,9 @@ class MateriaListTypeFragment : Fragment() {
                                 .load(response.body()?.image)
                                 .into(typeImage)
 
-
+                            var lat = response.body()?.latitude
+                            var lon = response.body()?.longitude
+                            createMarker(lat!!,lon!!)
                         }
                     }
 
@@ -145,5 +165,28 @@ class MateriaListTypeFragment : Fragment() {
                     putString(TYPE_ID, endpoint)
                 }
             }
+    }
+
+    override fun onMapReady(gMap: GoogleMap) {
+        map = gMap
+        // createMarker(0.0,0.0)
+    }
+
+    private fun createMarker(lat: Double, lon: Double){
+        val coordinates = LatLng(lat, lon)
+
+
+
+        val marker = MarkerOptions()
+            .position(coordinates)
+            .title("Location")
+            .snippet("Not actual place")
+            .icon(icon)
+
+        map.addMarker(marker)
+
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates,18f),
+            4000,
+            null)
     }
 }
