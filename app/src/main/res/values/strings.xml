@@ -33,4 +33,12 @@
     <string name="LinkEmailStrFail">Could not send the password reset email</string>
     <string name="InsertEmailStr">Email must not be empty</string>
     <string name="cancelStr">Cancel</string>
+    <string name="email_error">Error: Email is not correctly formatted</string>
+    <string name="password_invalid">Error: Password is invalid</string>
+    <string name="account_exists">An account with this email already exists</string>
+    <string name="session_expired">Your session has expired. Please log in again.</string>
+    <string name="not_registered">No user found with the requested credentials</string>
+    <string name="password_length_invalid">Password must be at least 6 characters</string>
+    <string name="no_network">Network not available</string>
+    <string name="auth_error">Error authenticating user. Please try again.</string>
 </resources>

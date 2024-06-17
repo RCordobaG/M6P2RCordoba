@@ -10,8 +10,11 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.auth
 import com.rcordoba.m6p2rcordoba.R
 import com.rcordoba.m6p2rcordoba.databinding.FragmentLoginBinding
@@ -76,9 +79,8 @@ class FragmentLogin : Fragment() {
         binding.loginButton.setOnClickListener{
             var email = binding.loginTextEmail.text.toString()
             var password = binding.loginTextPassword.text.toString()
-            Log.d("Bottled_CUM","email: {$email}, password: {$password}")
             if (email.isNotBlank()){
-                if(password.isNotBlank()){
+                if(password.isNotBlank() || password.length < 6){
                     auth.signInWithEmailAndPassword(email,password)
                         .addOnCompleteListener{ task ->
                             if(task.isSuccessful){
@@ -98,8 +100,9 @@ class FragmentLogin : Fragment() {
                             else{
                                 Toast.makeText(requireContext(),
                                     getString(R.string.login_failed),Toast.LENGTH_SHORT).show()
-                                    Log.w("SEX", "createUserWithEmail:failure", task.exception)
+                                    Log.w("FRBSERROR", "createUserWithEmail:failure", task.exception)
                             }
+                            handleErrors(task)
                         }
                 }
                 else{
@@ -140,10 +143,10 @@ class FragmentLogin : Fragment() {
                         }.addOnFailureListener {
                             Toast.makeText(
                                 requireContext(),
-                                getString(R.string.LinkEmailStrFail, it.message),
+                                getString(R.string.LinkEmailStrFail),
                                 Toast.LENGTH_SHORT
                             )
-                                .show() //it tiene la excepciÃ³n
+                                .show()
                         }
                     } else {
                         Toast.makeText(
@@ -152,6 +155,7 @@ class FragmentLogin : Fragment() {
                             Toast.LENGTH_SHORT
                         )
                             .show()
+
                     }
                 }.setNegativeButton(getString(R.string.cancelStr)) { dialog, _ ->
                     dialog.dismiss()
@@ -159,6 +163,62 @@ class FragmentLogin : Fragment() {
                 .create()
                 .show()
         }
+    }
+
+    private fun handleErrors(task: Task<AuthResult>){
+        var errorCode = ""
+
+        try{
+            errorCode = (task.exception as FirebaseAuthException).errorCode
+        }catch(e: Exception){
+            e.printStackTrace()
+        }
+
+        when(errorCode){
+            "ERROR_INVALID_EMAIL" -> {
+                Toast.makeText(requireContext(), getString(R.string.email_error), Toast.LENGTH_SHORT).show()
+                binding.loginTextEmail.error = getString(R.string.email_error)
+                binding.loginTextEmail.requestFocus()
+            }
+            "ERROR_WRONG_PASSWORD" -> {
+                Toast.makeText(requireContext(),
+                    getString(R.string.password_invalid), Toast.LENGTH_SHORT).show()
+                binding.loginTextPassword.error = getString(R.string.password_invalid)
+                binding.loginTextPassword.requestFocus()
+                binding.loginTextPassword.setText("")
+
+            }
+            "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL" -> {
+                //An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.
+                Toast.makeText(requireContext(),
+                    getString(R.string.account_exists), Toast.LENGTH_SHORT).show()
+            }
+            "ERROR_EMAIL_ALREADY_IN_USE" -> {
+                Toast.makeText(requireContext(), getString(R.string.account_exists), Toast.LENGTH_LONG).show()
+                binding.loginTextEmail.error = getString(R.string.account_exists)
+                binding.loginTextEmail.requestFocus()
+            }
+            "ERROR_USER_TOKEN_EXPIRED" -> {
+                Toast.makeText(requireContext(),
+                    getString(R.string.session_expired), Toast.LENGTH_LONG).show()
+            }
+            "ERROR_USER_NOT_FOUND" -> {
+                Toast.makeText(requireContext(),
+                    getString(R.string.not_registered), Toast.LENGTH_LONG).show()
+            }
+            "ERROR_WEAK_PASSWORD" -> {
+                Toast.makeText(requireContext(), getString(R.string.password_invalid), Toast.LENGTH_LONG).show()
+                binding.loginTextPassword.error = getString(R.string.password_length_invalid)
+                binding.loginTextPassword.requestFocus()
+            }
+            "NO_NETWORK" -> {
+                Toast.makeText(requireContext(), getString(R.string.no_network), Toast.LENGTH_LONG).show()
+            }
+            else -> {
+                Toast.makeText(requireContext(), getString(R.string.auth_error), Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     companion object {
