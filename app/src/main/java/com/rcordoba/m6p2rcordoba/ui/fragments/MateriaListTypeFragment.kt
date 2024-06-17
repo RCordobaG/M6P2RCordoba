@@ -13,11 +13,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.LocationSource
+import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -54,6 +57,10 @@ class MateriaListTypeFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var map : GoogleMap
 
+    private var lat : Double = 0.0
+    private var lon : Double = 0.0
+
+
     private var type_id: String? = null
 
     private lateinit var repository: MateriaRepository
@@ -61,11 +68,17 @@ class MateriaListTypeFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var auth: FirebaseAuth
 
-    lateinit var icon:BitmapDescriptor
+    private lateinit var icon:BitmapDescriptor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        icon = BitmapDescriptorFactory.fromResource(R.drawable.dog_bone)
+        try {
+            MapsInitializer.initialize(requireContext())
+
+        }
+        catch (e : GooglePlayServicesNotAvailableException){
+            e.printStackTrace()
+        }
         arguments?.let { args ->
             type_id = args.getString(TYPE_ID)
             Log.d(Constants.LOGTAG, "Received endpoint: ${type_id}")
@@ -90,6 +103,10 @@ class MateriaListTypeFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
 
+        //val mapFragment : SupportMapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        //mapFragment.getMapAsync(this)
+
+        binding.mapView3.onCreate(savedInstanceState)
         binding.mapView3.getMapAsync(this)
 
         binding.typeLogoutButton.setOnClickListener{
@@ -127,9 +144,17 @@ class MateriaListTypeFragment : Fragment(), OnMapReadyCallback {
                                 .load(response.body()?.image)
                                 .into(typeImage)
 
-                            var lat = response.body()?.latitude
-                            var lon = response.body()?.longitude
-                            createMarker(lat!!,lon!!)
+                            lat = response.body()?.latitude!!
+                            lon = response.body()?.longitude!!
+                            Log.d("Debug","${lat},${lon}")
+
+                            try {
+                                createMarker(lat,lon)
+                            }
+                            catch (error : Exception){
+                                Log.e("Exception", "${error}")
+                                error.printStackTrace();
+                            }
                         }
                     }
 
@@ -145,6 +170,29 @@ class MateriaListTypeFragment : Fragment(), OnMapReadyCallback {
             }
         }
 
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+        // createMarker(0.0,0.0)
+    }
+
+    private fun createMarker(lat: Double, lon: Double){
+        val coordinates = LatLng(lat, lon)
+
+
+
+        val marker = MarkerOptions()
+            .position(coordinates)
+            .title("Location")
+            .snippet("Not actual place")
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.mapicon))
+
+        map.addMarker(marker)
+
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates,18f),
+            1000,
+            null)
     }
 
 
@@ -167,26 +215,5 @@ class MateriaListTypeFragment : Fragment(), OnMapReadyCallback {
             }
     }
 
-    override fun onMapReady(gMap: GoogleMap) {
-        map = gMap
-        // createMarker(0.0,0.0)
-    }
 
-    private fun createMarker(lat: Double, lon: Double){
-        val coordinates = LatLng(lat, lon)
-
-
-
-        val marker = MarkerOptions()
-            .position(coordinates)
-            .title("Location")
-            .snippet("Not actual place")
-            .icon(icon)
-
-        map.addMarker(marker)
-
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates,18f),
-            4000,
-            null)
-    }
 }
